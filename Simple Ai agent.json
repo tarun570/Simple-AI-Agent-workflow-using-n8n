@@ -1,0 +1,117 @@
+{
+  "name": "Simple Ai agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -192,
+        -48
+      ],
+      "id": "2e86decd-c2b3-4c86-901c-9b95bcfb9c85",
+      "name": "When chat message received",
+      "webhookId": "dc4d46c6-e67b-4458-8238-370772d2f16b"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        32,
+        -48
+      ],
+      "id": "b8e3e555-c8ec-4d6c-86b9-3df9373cc816",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -48,
+        160
+      ],
+      "id": "7f7f9520-f242-4c73-95fe-e0969fafdc52",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "qHuD0BbTGD8opJlv",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        112,
+        160
+      ],
+      "id": "e3f7254c-8565-432d-a16a-791340b4f2fc",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ca5a4378-6a71-4436-8847-2426fc635fd7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "95de82f4d04283fff491f9a52799435e8ae424d6501c7992c544d25cccd1fcd6"
+  },
+  "id": "F20Y4Xo6F8cr5Plh",
+  "tags": []
+}
